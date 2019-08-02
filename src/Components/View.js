@@ -98,16 +98,17 @@ class View extends Component {
 
   handleChange = event => {
     let state = Object.assign({}, this.state);
-
     state[event.target.name] = event.target.value;
     this.setState(state);
+    // console.log("in Create");
+    // console.log(state);
   };
 
   viewStops = () => {
     const { classes } = this.props;
     let children = [];
     let i = 0;
-    console.log(this.state.stops);
+    // console.log(this.state.stops);
     if (this.state.stops.length === 0 && this.state.name === "EX-999") {
       let state = Object.assign({}, this.state);
       this.state.stops.push({

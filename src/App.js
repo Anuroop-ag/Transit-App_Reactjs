@@ -113,6 +113,7 @@ class App extends Component {
   };
 
   saveRoute = (route, index) => {
+    // console.log(route.name);
     if (route.name === "" || route.id === "") {
       alert("please fill the details");
     } else if (route.stops.length === 1) {
@@ -123,10 +124,14 @@ class App extends Component {
       let state = Object.assign({}, this.state);
       if (index === -1) {
         state.routes.push(route);
+      } else {
+        this.state.routes[index] = route;
       }
       state.add = false;
       state.activeRoute = -1;
       this.setState(state);
+      // console.log(this.state.routes[index]);
+      // console.log(index);
     }
   };
 
