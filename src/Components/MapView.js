@@ -3,12 +3,14 @@ import * as React from "react";
 import { Map, GoogleApiWrapper, Polyline, Marker } from "google-maps-react";
 import Button from "@material-ui/core/Button";
 import { Icon } from "@material-ui/core";
+
 class MapView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       coords: [],
-      markerCoord: []
+      markerCoord: [],
+      markerNames: []
     };
   }
 
@@ -17,11 +19,20 @@ class MapView extends Component {
     var directionsService = new window.google.maps.DirectionsService();
 
     let stops = [];
+    let markerNames = [];
     let state = Object.assign({}, this.state);
     if (this.props.route.stops.length === 0) {
       stops.push({ lat: 12.9304278, lng: 77.678404 });
       stops.push({ lat: 12.9220882, lng: 77.66572769999993 });
       stops.push({ lat: 12.9255622, lng: 77.63709010000002 });
+
+      this.state.markerNames.push(
+        "Iblur Park, Outer Ring Rd, Green Glen Layout, Bellandur, Bengaluru, Karnataka 560103, India"
+      );
+      this.state.markerNames.push(
+        "Barbeque nation, 1st Block Koramangala, Koramangala, Bengaluru, Karnataka 560034, India"
+      );
+      this.state.markerNames.push("Bellandur, Bengaluru, Karnataka, India");
 
       this.state.markerCoord.push({ lat: 12.9220882, lng: 77.66572769999993 });
       this.state.markerCoord.push({ lat: 12.9255622, lng: 77.63709010000002 });
@@ -29,7 +40,9 @@ class MapView extends Component {
     } else {
       for (let stop of this.props.route.stops) {
         stops.push(stop.location);
+        this.state.markerNames.push(stop.name);
         this.state.markerCoord.push(stop.location);
+        // console.log(stop);
       }
     }
     this.setState(state);
@@ -75,10 +88,11 @@ class MapView extends Component {
     const start = "start";
     const destination = "destination";
     const stops = "stop";
+    console.log(this.state.markerNames);
     const { google } = this.props;
-    const markers = this.state.markerCoord.map(coord => (
+    const markers = this.state.markerCoord.map((coord, index) => (
       <Marker
-        title={stops}
+        title={this.state.markerNames[index]}
         // key={value}
         icon={{
           url: "https://img.icons8.com/cotton/48/000000/trolleybus--v2.png",
