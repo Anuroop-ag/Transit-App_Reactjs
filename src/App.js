@@ -133,7 +133,7 @@ class App extends Component {
   openView = index => {
     let state = Object.assign({}, this.state);
     state.activeRoute = index;
-    state.view = true;
+    state.create = true;
     this.setState(state);
   };
 
