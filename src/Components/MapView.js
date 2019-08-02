@@ -20,15 +20,12 @@ class MapView extends Component {
     let state = Object.assign({}, this.state);
     if (this.props.route.stops.length === 0) {
       stops.push({ lat: 12.9304278, lng: 77.678404 });
-      stops.push({ lat: 12.9240682, lng: 77.64554079999994 });
       stops.push({ lat: 12.9220882, lng: 77.66572769999993 });
       stops.push({ lat: 12.9255622, lng: 77.63709010000002 });
 
-      this.state.markerCoord.push({ lat: 12.9240682, lng: 77.64554079999994 });
       this.state.markerCoord.push({ lat: 12.9220882, lng: 77.66572769999993 });
       this.state.markerCoord.push({ lat: 12.9255622, lng: 77.63709010000002 });
       this.state.markerCoord.push({ lat: 12.9304278, lng: 77.678404 });
-      this.state.markerCoord.push({ lat: 12.9240881, lng: 77.64962639999999 });
     } else {
       for (let stop of this.props.route.stops) {
         stops.push(stop.location);

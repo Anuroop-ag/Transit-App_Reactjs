@@ -10,7 +10,8 @@ import Paper from "@material-ui/core/Paper";
 import View from "./Components/View.js";
 import MapView from "./Components/MapView.js";
 import Header from "./Components/Header.js";
-import Upload from "./Components/FileUpload.js";
+// import Upload from "./Components/FileUpload.js";
+
 const useStyles = makeStyles(theme => ({
   root: {
     // width: '100%',
@@ -48,15 +49,10 @@ class App extends Component {
     ]
   };
 
-  componentDidMount() {
-    // ** following two lines of code do the same thing
-    // using the first version, however, could potentially cause errors
-    // see "Referencing unimported libraries when using create-react-app"
-    // $(this.refs.list).fadeOut(); // version 1
-    // window.$(this.refs.list).fadeOut(); // version 2
-  }
+  componentDidMount() {}
 
   viewRoutes = () => {
+    //View the Saved routes
     let children = [];
     let i = 0;
 
@@ -97,14 +93,15 @@ class App extends Component {
   };
 
   openRoute(index) {
+    // Active Status of route
     let state = Object.assign({}, this.state);
     state.activeRoute = index;
     state.add = true;
-
     this.setState(state);
   }
 
   deleteRoute(index) {
+    //deletion of route
     let state = Object.assign({}, this.state);
     state.routes.splice(index, 1);
     this.setState(state);
@@ -161,8 +158,6 @@ class App extends Component {
             close={this.closeMapView}
           />
         ) : this.state.add ? (
-          // <Upload/>
-
           <View
             index={this.state.activeRoute}
             route={
