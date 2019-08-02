@@ -10,11 +10,9 @@ import Paper from "@material-ui/core/Paper";
 import View from "./Components/View.js";
 import MapView from "./Components/MapView.js";
 import Header from "./Components/Header.js";
-// import Upload from "./Components/FileUpload.js";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // width: '100%',
     marginTop: theme.spacing(3),
     overflowX: "auto"
   },
@@ -27,7 +25,7 @@ class App extends Component {
   state = {
     open: false,
     add: false,
-    view: false,
+    create: false,
     activeRoute: -1,
     emptyRoute: {
       name: "EX-101",
@@ -117,8 +115,10 @@ class App extends Component {
   saveRoute = (route, index) => {
     if (route.name === "" || route.id === "") {
       alert("please fill the details");
-    } else if (route.stops.length < 2) {
-      alert("Select Start and Destination places");
+    } else if (route.stops.length === 1) {
+      alert("Route can't be created with one Stop!");
+    } else if (route.stops.length === 0) {
+      alert("Routes can't be created without Stops!Please Select a few.");
     } else {
       let state = Object.assign({}, this.state);
       if (index === -1) {
@@ -138,7 +138,7 @@ class App extends Component {
   };
 
   closeMapView = () => {
-    this.setState({ view: false });
+    this.setState({ create: false });
   };
 
   render() {
@@ -147,7 +147,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        {this.state.view ? (
+        {this.state.create ? (
           <MapView
             index={this.state.activeRoute}
             route={
