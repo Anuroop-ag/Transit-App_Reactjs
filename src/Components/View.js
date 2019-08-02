@@ -107,6 +107,26 @@ class View extends Component {
     const { classes } = this.props;
     let children = [];
     let i = 0;
+    console.log(this.state.stops);
+    if (this.state.stops.length === 0 && this.state.name === "EX-999") {
+      let state = Object.assign({}, this.state);
+      this.state.stops.push({
+        name: "Bellandur, Bengaluru, Karnataka, India",
+        location: { lat: 12.9304278, lng: 77.678404 }
+      });
+      this.state.stops.push({
+        name:
+          "Iblur Park, Outer Ring Rd, Green Glen Layout, Bellandur, Bengaluru, Karnataka 560103, India",
+        location: { lat: 12.9220882, lng: 77.66572769999993 }
+      });
+
+      this.state.stops.push({
+        name:
+          "Barbeque nation, 1st Block Koramangala, Koramangala, Bengaluru, Karnataka 560034, India",
+        location: { lat: 12.9255622, lng: 77.63709010000002 }
+      });
+      this.setState(state);
+    }
     for (let stop of this.state.stops) {
       children.push(
         <div key={i} style={{ marginBottom: 10 }}>
